@@ -28,19 +28,21 @@ var pointDraw = 1;
 function setup() {
 let canvas = createCanvas(windowWidth,windowHeight);
 canvas.parent('p5-container');
-pic = loadImage("assets/images/20231205154234.jpg");
-gradientBackground();
+pic = loadImage("assets/images/new.png");
+// gradientBackground();
 ribbons = [];
 }
 function draw() {
-pic.loadPixels();
-if (mouseControl) {
-if (frameCount % 10 == 0) {
-noStroke();
-fill(242, 230, 230, 30);
-rect(0, 0, width, height);
-}
-pointDraw = 0;
+// pic.loadPixels();
+// if (mouseControl) {
+// if (frameCount % 10 == 0) {
+// noStroke();
+// fill(242, 230, 230, 30);
+// rect(0, 0, width, height);
+// }
+// pointDraw = 0;
+tint(255,60);
+    image(pic,0,0,windowWidth,windowHeight);
 if (frameCount % 60 == 0) {
 var batch = 6;
 for (var batch_index = 0; batch_index < batch; batch_index++) {
@@ -55,41 +57,41 @@ if (ribbon.isOffScreen() || ribbon.shouldRemove()) {
 ribbons.splice(i, 1);
 }
 }
-}
-if (!mouseControl && pointDraw == 0) {
-pointDraw = 1;
-gradientBackground();
-}
-colorMode(RGB, 255, 255, 255);
-for (let y = 0; y < pic.height; y += pixelSize) {
-for (let x = 0; x < pic.width; x += pixelSize) {
-let newX = map(x, 0, pic.width, 0, width);
-let newY = map(y, 0, pic.height, 0, height);
-let index = x + y * pic.width;
-let currentColor = pic.pixels[index];
-let r = red(currentColor);
-let g = green(currentColor);
-let b = blue(currentColor);
-let h = hue(currentColor);
-let s = saturation(currentColor);
-let bB = brightness(currentColor);
-let avgHSB = (h / 3.6 + s + bB) / 3;
-let avgRGB = (r + s + b) / 3;
-let newSize = map(avgHSB, 0, 100, 2, pixelSize);
-let newSizeRY = map(avgRGB, 0, 255, 2, pixelSize); // 用于突出显示红色和黄色
-fill(currentColor);
-noStroke();
-rect(newX, newY, newSize, newSizeRY);
-}
-}
-}
-function mousePressed() {
-boach = !mouseControl;
-mouseControl = boach;
-}
+// }
+// if (!mouseControl && pointDraw == 0) {
+// pointDraw = 1;
+// gradientBackground();
+// }
+// colorMode(RGB, 255, 255, 255);
+// for (let y = 0; y < pic.height; y += pixelSize) {
+// for (let x = 0; x < pic.width; x += pixelSize) {
+// let newX = map(x, 0, pic.width, 0, width);
+// let newY = map(y, 0, pic.height, 0, height);
+// let index = x + y * pic.width;
+// let currentColor = pic.pixels[index];
+// let r = red(currentColor);
+// let g = green(currentColor);
+// let b = blue(currentColor);
+// let h = hue(currentColor);
+// let s = saturation(currentColor);
+// let bB = brightness(currentColor);
+// let avgHSB = (h / 3.6 + s + bB) / 3;
+// let avgRGB = (r + s + b) / 3;
+// let newSize = map(avgHSB, 0, 100, 2, pixelSize);
+// let newSizeRY = map(avgRGB, 0, 255, 2, pixelSize); // 用于突出显示红色和黄色
+// fill(currentColor);
+// noStroke();
+// rect(newX, newY, newSize, newSizeRY);
+// }
+// }
+// }
+// function mousePressed() {
+// boach = !mouseControl;
+// mouseControl = boach;
+ }
 function Ribbon(w, y1, movingRight) {
     this.w = w;
-    this.h = random(15, 25);
+    this.h = random(5, 15);
     this.y1 = y1;
     this.movingRight = movingRight;
     this.x1 = this.movingRight ? -this.w : width;
@@ -138,46 +140,46 @@ Ribbon.prototype.shouldRemove = function() {
     return this.x1 > width / 6 && this.x1 < width * 5 / 6 && random(width * 2 / (3 * this.speed)) < 1 && this.y1 > height / 4;
 }
 
-function gradientBackground() {
-  colorMode(RGB,255,255,255);
-  for (var xx = 0; xx < width; xx++) {
-    var yy;
-    for (yy = 0; yy < height / 12; yy++) {
-      var ratioY = map(yy, 0, height / 12, 0, 1);
-      var c = lerpColor(color('#FABDBE'), color('#FA7779'), ratioY);
-      stroke(c);
-      point(xx, yy);
-    }
-    yy--;
-    for (yy++; yy < height * 2 / 5; yy++) {
-      var ratioY = map(yy, height / 12, height * 2 / 5, 0, 1);
-      var c = lerpColor(color('#FA7779'), color('#77A8FA'), ratioY);
-      stroke(c);
-      point(xx, yy);
-    }
-    yy--;
-    for (yy++; yy < height * 3 / 5; yy++) {
-      var ratioY = map(yy, height * 2 / 5, height * 3 / 5, 0, 1);
-      var c = lerpColor(color('#77A8FA'), color('#BDFAF5'), ratioY);
-      stroke(c);
-      point(xx, yy);
-    }
-    yy--;
-    for (yy++; yy < height * 7 / 10; yy++) {
-      var ratioY = map(yy, height * 3 / 5, height * 7 / 10, 0, 1);
-      var c = lerpColor(color('#BDFAF5'), color('#E1F085'), ratioY);
-      stroke(c);
-      point(xx, yy);
-    }
-    yy--;
-    for (yy++; yy < height; yy++) {
-      var ratioY = map(yy, height * 7 / 10, height, 0, 1);
-      var c = lerpColor(color('#E1F085'), color('#FF6243'), ratioY);
-      stroke(c);
-      point(xx, yy);
-    }
-  }
-}
+// function gradientBackground() {
+//   colorMode(RGB,255,255,255);
+//   for (var xx = 0; xx < width; xx++) {
+//     var yy;
+//     for (yy = 0; yy < height / 12; yy++) {
+//       var ratioY = map(yy, 0, height / 12, 0, 1);
+//       var c = lerpColor(color('#FABDBE'), color('#FA7779'), ratioY);
+//       stroke(c);
+//       point(xx, yy);
+//     }
+//     yy--;
+//     for (yy++; yy < height * 2 / 5; yy++) {
+//       var ratioY = map(yy, height / 12, height * 2 / 5, 0, 1);
+//       var c = lerpColor(color('#FA7779'), color('#77A8FA'), ratioY);
+//       stroke(c);
+//       point(xx, yy);
+//     }
+//     yy--;
+//     for (yy++; yy < height * 3 / 5; yy++) {
+//       var ratioY = map(yy, height * 2 / 5, height * 3 / 5, 0, 1);
+//       var c = lerpColor(color('#77A8FA'), color('#BDFAF5'), ratioY);
+//       stroke(c);
+//       point(xx, yy);
+//     }
+//     yy--;
+//     for (yy++; yy < height * 7 / 10; yy++) {
+//       var ratioY = map(yy, height * 3 / 5, height * 7 / 10, 0, 1);
+//       var c = lerpColor(color('#BDFAF5'), color('#E1F085'), ratioY);
+//       stroke(c);
+//       point(xx, yy);
+//     }
+//     yy--;
+//     for (yy++; yy < height; yy++) {
+//       var ratioY = map(yy, height * 7 / 10, height, 0, 1);
+//       var c = lerpColor(color('#E1F085'), color('#FF6243'), ratioY);
+//       stroke(c);
+//       point(xx, yy);
+//     }
+//   }
+// }
 </script>
 </body>
 </html>
