@@ -17,7 +17,7 @@
         }
     </style>
     <script>
-        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）")
+        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）。")
     </script>
 </head>
 <body>
@@ -31,8 +31,10 @@
     let mouseControl = false;
     let mobilePhone=false;
     let controlMobilePhone;
+    let control=false;
     let ribbons = [];
     let pointDraw = 1;
+    let deviceType = detectDeviceType();
 
 function setup() {
     createCanvas(windowWidth, windowHeight); // 创建与窗口大小一致的画布
@@ -58,17 +60,17 @@ function setup() {
 
     function draw() {
         //丝带实现
-        if (mouseControl) {
+        if (control) {
             if (frameCount % 10 == 0) {
-             //if(mobilePhone==false){
+             if(deviceType==="Desktop"){
                 if(offscreen){
                     image(offscreen,0,0);
                 }
-             // }else{
-             //     noStroke();
-             //     fill(255, 240, 240, 30);
-             //     rect(0, 0, windowWidth, windowHeight);
-             // }
+              }else{
+                  noStroke();
+                  fill(255, 240, 240, 30);
+                  rect(0, 0, windowWidth, windowHeight);
+              }
 
                // drawGradientBackground(3);
             }
@@ -88,7 +90,7 @@ function setup() {
 
             // 移除丝带
             ribbons = ribbons.filter(r => !r.isOffScreen() && !r.shouldRemove());
-        } else if (!mouseControl && pointDraw == 0) {
+        } else if (!control && pointDraw == 0) {
             pointDraw = 1;
             colorMode(RGB, 255, 255, 255);
             //drawGradientBackground(255);
@@ -229,20 +231,23 @@ function setup() {
     function mousePressed() {
         boach = !mouseControl;
         mouseControl = boach;
+        if (deviceType==="Desktop"){
         let reminder= mouseControl?"旗帜出现！":"旗帜消失！";
+        }
         alert(reminder);
     }
     //手机触屏交互
      function touchEnded() {
-         boach = !mouseControl;
-         mouseControl = boach;
-         let reminder= mouseControl?"旗帜出现":"旗帜消失";
-         alert(reminder);
          controlMobilePhone=!mobilePhone;
          mobilePhone=controlMobilePhone;
-
+         if (deviceType!=="Desktop"){
+         let reminder= mouseControl?"旗帜出现":"旗帜消失";
+         alert(reminder);
+         }
           return false;
      }
+
+    control = deviceType==="Desktop"?mouseControl:mobilePhone;
 
     //
 </script>
