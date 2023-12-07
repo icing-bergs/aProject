@@ -17,11 +17,26 @@
         }
     </style>
     <script>
-        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）。")
+        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）")
     </script>
 </head>
 <body>
 <script>
+function detectDeviceType() {
+    let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // 正则表达式检测移动设备
+    if (/android/i.test(userAgent)) {
+        return "Android Device";
+    }
+
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS Device";
+    }
+
+    return "Desktop"; // 默认为桌面设备
+}
+    
     let backGround;
     let offscreen;
     let offscreenNoa;
