@@ -36,7 +36,8 @@ function detectDeviceType() {
 
     return "Desktop"; // 默认为桌面设备
 }
-    
+
+    let frameCountNow;
     let backGround;
     let offscreen;
     let offscreenNoa;
@@ -95,14 +96,14 @@ function setup() {
             }
             pointDraw = 0;
             if(deviceType==="Desktop"){
-                if (frameCount % 30 == 0) { // 每ji秒添加6个丝带
+                if (frameCount % 30 == 0||frameCount==(frameCountNow+2)) { // 每ji秒添加6个丝带
                     let batch = 6;
                     for (let batch_index = 0; batch_index < batch; batch_index++) {
                         ribbons.push(new Ribbon(random(200, 400), random(height / 3), random(-1, 1) > 0));
                     }
                 }
             }else{
-                if (frameCount % 10 == 0) { // 每ji秒添加6个丝带
+                if (frameCount % 10 == 0||frameCount==(frameCountNow+2)) { // 每ji秒添加6个丝带
                     let batch = 6;
                     for (let batch_index = 0; batch_index < batch; batch_index++) {
                         ribbons.push(new Ribbon(random(200, 400), random(height / 3), random(-1, 1) > 0));
@@ -262,6 +263,7 @@ function setup() {
         if (deviceType==="Desktop"){
         let desktopReminder= mouseControl?"旗帜出现！":"旗帜消失！";
         alert(desktopReminder);
+        frameCountNow=frameCount;
         }
      
     }
@@ -272,6 +274,7 @@ function setup() {
          if (deviceType!=="Desktop"){
          let mobileReminder= mouseControl?"旗帜出现！":"旗帜消失！";
          alert(mobileReminder);
+             frameCountNow=frameCount;
          }
           return false;
      }
