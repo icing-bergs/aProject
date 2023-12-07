@@ -74,6 +74,7 @@ function setup() {
 }
 
     function draw() {
+        control = deviceType==="Desktop"?mouseControl:mobilePhone;
         //丝带实现
         if (control) {
             if (frameCount % 10 == 0) {
@@ -263,7 +264,7 @@ function setup() {
           return false;
      }
 
-    control = deviceType==="Desktop"?mouseControl:mobilePhone;
+    
 
     //
 </script>
