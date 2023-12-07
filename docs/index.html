@@ -247,17 +247,18 @@ function setup() {
         boach = !mouseControl;
         mouseControl = boach;
         if (deviceType==="Desktop"){
-        let reminder= mouseControl?"旗帜出现！":"旗帜消失！";
+        let desktopReminder= mouseControl?"旗帜出现！":"旗帜消失！";
+        alert(desktopReminder);
         }
-        alert(reminder);
+     
     }
     //手机触屏交互
      function touchEnded() {
          controlMobilePhone=!mobilePhone;
          mobilePhone=controlMobilePhone;
          if (deviceType!=="Desktop"){
-         let reminder= mouseControl?"旗帜出现":"旗帜消失";
-         alert(reminder);
+         let mobileReminder= mouseControl?"旗帜出现":"旗帜消失";
+         alert(mobileReminder);
          }
           return false;
      }
