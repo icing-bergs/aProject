@@ -229,12 +229,15 @@ function setup() {
     function mousePressed() {
         boach = !mouseControl;
         mouseControl = boach;
+        let reminder= mouseControl?"旗帜出现！":"旗帜消失！";
+        alert(reminder);
     }
     //手机触屏交互
      function touchEnded() {
          boach = !mouseControl;
          mouseControl = boach;
-        
+         let reminder= mouseControl?"旗帜出现！":"旗帜消失！";
+         alert(reminder);
          controlMobilePhone=!mobilePhone;
          mobilePhone=controlMobilePhone;
 
