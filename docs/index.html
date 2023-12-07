@@ -29,6 +29,8 @@
     let pixelSize = 6;
     let boach;
     let mouseControl = false;
+    let mobilePhone=false;
+    let controlMobilePhone;
     let ribbons = [];
     let pointDraw = 1;
 
@@ -58,13 +60,15 @@ function setup() {
         //丝带实现
         if (mouseControl) {
             if (frameCount % 10 == 0) {
+             if(mobilePhone==false){
                 if(offscreen){
                     image(offscreen,0,0);
                 }
-                // noStroke();
-                // fill(255, 240, 240, 5);
-                // rect(0, 0, windowWidth, windowHeight);
-
+             }else{
+                 noStroke();
+                 fill(255, 240, 240, 30);
+                 rect(0, 0, windowWidth, windowHeight);
+             }
 
                // drawGradientBackground(3);
             }
@@ -227,11 +231,15 @@ function setup() {
         mouseControl = boach;
     }
     //手机触屏交互
-    // function touchEnded() {
-    //     boach = !mouseControl;
-    //     mouseControl = boach;
-    //     return false;
-    // }
+     function touchEnded() {
+         boach = !mouseControl;
+         mouseControl = boach;
+        
+         controlMobilePhone=!mobilePhone;
+         mobilePhone=controlMobilePhone;
+
+          return false;
+     }
 
     //
 </script>
