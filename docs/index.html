@@ -52,8 +52,7 @@ function detectDeviceType() {
     let deviceType = detectDeviceType();
 
 function setup() {
-    alert(windowWidth);
-    alert(windowHeight);
+
     createCanvas(windowWidth, windowHeight); // 创建与窗口大小一致的画布
     ribbons = [];
 
@@ -164,7 +163,7 @@ function setup() {
     class Ribbon {
         constructor(w, y1, movingRight) {
             this.w = w;
-            this.h = random(0.012694*windowWidth, 0.021157*windowHeight); // 丝带的高度
+            this.h = random(0.010582*windowWidth, 0.019047*windowHeight); // 丝带的高度
             this.y1 = y1;
             this.movingRight = movingRight;
             this.x1 = movingRight ? -w : windowWidth;
