@@ -52,6 +52,7 @@ function detectDeviceType() {
     let deviceType = detectDeviceType();
 
 function setup() {
+    alert(windowWidth,windowHeight);
     createCanvas(windowWidth, windowHeight); // 创建与窗口大小一致的画布
     ribbons = [];
 
@@ -87,9 +88,7 @@ function setup() {
               }else{
                 if (frameCount % 2 == 0){
 
-                  noStroke();
-                  fill(255, 240, 240, 30);
-                  rect(0, 0, windowWidth, windowHeight);
+                  image(offscreen,0,0);
                }
 
                // drawGradientBackground(3);
@@ -164,7 +163,7 @@ function setup() {
     class Ribbon {
         constructor(w, y1, movingRight) {
             this.w = w;
-            this.h = random(12, 20); // 丝带的高度
+            this.h = random(0.012694*windowWidth, 0.021157*windowHeight); // 丝带的高度
             this.y1 = y1;
             this.movingRight = movingRight;
             this.x1 = movingRight ? -w : windowWidth;
