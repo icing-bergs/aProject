@@ -17,7 +17,7 @@
         }
     </style>
     <script>
-        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）。")
+        alert("点击鼠标左键（触摸屏幕）以开始！\n温馨提示:进行第一次交互时请耐心等待旗帜出现，不要立即进行第二次交互\n无旗帜时点击鼠标左键（触摸屏幕）可实现旗帜的出现；有旗帜时进行如上操作可实现旗帜消失\n建议使用电脑以获得更佳体验；使用手机时，若轻触无效果，则尝试其他操作（滑动等）。\n请耐心等待！")
     </script>
 </head>
 <body>
@@ -77,24 +77,37 @@ function setup() {
         control = deviceType==="Desktop"?mouseControl:mobilePhone;
         //丝带实现
         if (control) {
-            if (frameCount % 10 == 0) {
+           
              if(deviceType==="Desktop"){
+                  if (frameCount % 10 == 0) {
                 if(offscreen){
                     image(offscreen,0,0);
                 }
+                  }
               }else{
+                if (frameCount % 2 == 0){
+
                   noStroke();
                   fill(255, 240, 240, 30);
                   rect(0, 0, windowWidth, windowHeight);
-              }
+               }
 
                // drawGradientBackground(3);
             }
             pointDraw = 0;
-            if (frameCount % 30 == 0) { // 每ji秒添加6个丝带
-                let batch = 6;
-                for (let batch_index = 0; batch_index < batch; batch_index++) {
-                    ribbons.push(new Ribbon(random(200, 400), random(height / 3), random(-1, 1) > 0));
+            if(deviceType==="Desktop"){
+                if (frameCount % 30 == 0) { // 每ji秒添加6个丝带
+                    let batch = 6;
+                    for (let batch_index = 0; batch_index < batch; batch_index++) {
+                        ribbons.push(new Ribbon(random(200, 400), random(height / 3), random(-1, 1) > 0));
+                    }
+                }
+            }else{
+                if (frameCount % 10 == 0) { // 每ji秒添加6个丝带
+                    let batch = 6;
+                    for (let batch_index = 0; batch_index < batch; batch_index++) {
+                        ribbons.push(new Ribbon(random(200, 400), random(height / 3), random(-1, 1) > 0));
+                    }
                 }
             }
 
@@ -258,7 +271,7 @@ function setup() {
          controlMobilePhone=!mobilePhone;
          mobilePhone=controlMobilePhone;
          if (deviceType!=="Desktop"){
-         let mobileReminder= mouseControl?"旗帜出现":"旗帜消失";
+         let mobileReminder= mouseControl?"旗帜出现！":"旗帜消失！";
          alert(mobileReminder);
          }
           return false;
